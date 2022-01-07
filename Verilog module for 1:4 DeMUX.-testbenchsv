@@ -1,0 +1,29 @@
+module DE_MUX_tb;
+  reg  dEn ;
+  reg [1:0] dS ;
+  wire dEnA, dEnB,dEnC,dEnD;
+  
+  DE_MUX A2(dEn,dS,dEnA,dEnB,dEnC,dEnD);
+  
+  initial 
+    begin
+      dEn = 1'b0 ; dS = 2'b00; 
+      #100
+      dEn = 1'b0 ; dS = 2'b01; 
+      #100
+      dEn = 1'b0 ; dS = 2'b10; 
+      #100
+      dEn = 1'b0 ; dS = 2'b11; 
+      #100
+      dEn = 1'b1 ; dS = 2'b00; 
+      #100;
+      
+   end
+  
+  initial
+    begin
+        $dumpfile("testResults.vcd");
+      $dumpvars(1,DE_MUX_tb);
+      $monitor("Time=%0d, dEn = %1b, dS = %2b, dEnA = %1b, dEnB = %1b, dEnC = %1b,dEnD = %1b", $time,dEn, dS, dEnA, dEnB, dEnC, dEnD);
+      end 
+endmodule
